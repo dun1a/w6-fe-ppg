@@ -1,34 +1,8 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import useSignup from '../components/useSignup'
 
 const SignupComponent = ({ setIsAuthenticated }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const {email, setEmail, password, setPassword, password2, setPassword2, handleSignup} = useSignup(setIsAuthenticated);
 
-  const handleSignup = async () => {
-    try {
-      const response = await fetch("/api/users/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (response.ok) {
-        const user = await response.json();
-        localStorage.setItem("user", JSON.stringify(user));
-        console.log("User signed up successfully!");
-        setIsAuthenticated(true);
-        navigate("/");
-      } else {
-        console.error("Signup failed", response);
-      }
-    } catch (error) {
-      console.error("Error during signup:", error);
-    }
-  };
 
   return (
     <div className="form-container">
@@ -48,6 +22,14 @@ const SignupComponent = ({ setIsAuthenticated }) => {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+        />
+      </label>
+      <label>
+        Password2:
+        <input
+          type="password2"
+          value={password2}
+          onChange={(e) => setPassword2(e.target.value)}
         />
       </label>
       <br />

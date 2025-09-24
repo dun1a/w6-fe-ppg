@@ -11,7 +11,9 @@ const createToken = (_id) => {
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
+
   try {
+    console.log(email, password);
     if (!email || !password) {
       throw Error("All fields must be filled");
     }
