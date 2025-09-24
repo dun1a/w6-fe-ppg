@@ -10,8 +10,7 @@ const createToken = (_id) => {
 // login a user
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
-
-
+  
   try {
     console.log(email, password);
     if (!email || !password) {
